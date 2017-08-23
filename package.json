@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/noahlotzer/react-simple-boilerplate.git"
+    "url": "https://github.com/MattWillcox/ChattyAppg.git"
   },
   "keywords": [
     "react",
@@ -19,12 +19,8 @@
     "edit",
     "webpack"
   ],
-  "author": "Noah-Jerome Lotzer <n.lotzer@neusta.de>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/noahlotzer/react-simple-boilerplate/issues"
-  },
-  "homepage": "https://github.com/noahlotzer/react-simple-boilerplate",
+  "author": "Matt Willcox",
+  "homepage": "https://github.com/MattWillcox/ChattyApp",
   "engines": {
     "node": ">=6.0.0"
   },
@@ -46,6 +42,7 @@
   },
   "dependencies": {
     "react": "15.4.2",
-    "react-dom": "15.4.2"
+    "react-dom": "15.4.2",
+    "ws": "^3.1.0"
   }
 }
