@@ -8,7 +8,7 @@ class ChatBar extends Component {
       username: '',
     }
 
-    this.onEnterMessage = this.onEnter.bind(this);
+    this.onEnterMessage = this.onEnterMessage.bind(this);
     this.onEnterUsername = this.onEnterUsername.bind(this);
     this.onChangeMessage = this.onChangeMessage.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
