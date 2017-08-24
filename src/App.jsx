@@ -22,7 +22,7 @@ class App extends Component {
       const messageObject = JSON.parse(event.data);
       switch(messageObject.type) {
 
-        case 'incomingMessage':
+        case 'incomingMessage': {
           console.log('incoming message');
           const newMessages = this.state.messages;
           newMessages.push({
@@ -34,8 +34,9 @@ class App extends Component {
           });
           this.setState({messages: newMessages});
           break;
+        }
 
-        case 'incomingNotification':
+        case 'incomingNotification': {
           if(messageObject.newUsername){
             console.log('incoming notification');
             const newMessages = this.state.messages;
@@ -48,21 +49,48 @@ class App extends Component {
             this.setState({messages: newMessages});
           }
           break;
+        }
 
-        case 'connectedUsers':
+        case 'incomingImage': {
+          console.log('incoming image');
+          const newMessages = this.state.messages;
+          newMessages.push({
+            type: 'incomingImage',
+            key: messageObject.key,
+            username: messageObject.username,
+            content: messageObject.content,
+            color: messageObject.color
+          });
+          this.setState({messages: newMessages});
+          break;
+        }
+
+        case 'connectedUsers': {
           this.setState({onlineUsers: messageObject.count});
           break;
+        }
       }
     });
   }
 
   onNewMessage(message) {
-    this.socket.send(JSON.stringify({
-      type: 'postMessage',
-      key: '',
-      username: this.state.currentUser.name,
-      content: message
-    }));
+    var imgRegex = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.(jpg$)|(png$)|(gif$)/
+    if(imgRegex.test(message)){
+      console.log('valid image');
+      this.socket.send(JSON.stringify({
+        type: 'postImage',
+        key: '',
+        username: this.state.currentUser.name,
+        content: message
+      }));
+    } else {
+      this.socket.send(JSON.stringify({
+        type: 'postMessage',
+        key: '',
+        username: this.state.currentUser.name,
+        content: message
+      }));
+    }
   }
 
   onNewUsername(username) {
