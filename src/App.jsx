@@ -7,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: {name: "Anonymous"}, // optional. if currentUser is not defined, it means the user is Anonymous
+      currentUser: {name: 'Anonymous'}, // optional. if currentUser is not defined, it means the user is Anonymous
       messages: [],
       notifications: [],
       onlineUsers: 0
@@ -22,7 +22,6 @@ class App extends Component {
       const messageObject = JSON.parse(event.data);
       switch(messageObject.type) {
         case 'incomingMessage': {
-          console.log('incoming message');
           const newMessages = this.state.messages;
           newMessages.push({
             type: 'incomingMessage',
@@ -36,7 +35,6 @@ class App extends Component {
         }
         case 'incomingNotification': {
           if(messageObject.newUsername){
-            console.log('incoming notification');
             const newMessages = this.state.messages;
             newMessages.push({
               type: 'incomingNotification',
@@ -49,7 +47,6 @@ class App extends Component {
           break;
         }
         case 'incomingImage': {
-          console.log('incoming image');
           const newMessages = this.state.messages;
           newMessages.push({
             type: 'incomingImage',
@@ -72,7 +69,6 @@ class App extends Component {
   onNewMessage(message) {
     var imgRegex = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.(jpg$)|(png$)|(gif$)/;
     if(imgRegex.test(message)){
-      console.log('valid image');
       this.socket.send(JSON.stringify({
         type: 'postImage',
         key: '',
