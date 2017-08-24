@@ -20,7 +20,7 @@ Install the dependencies and start the server.
 
 ### Screenshots
 
-['Screenshot of chatty messages'](https://github.com/MattWillcox/Chatty/build/home.png)
+['Screenshot of chatty messages'](https://github.com/MattWillcox/ChattyApp/blob/master/build/home.png)
 
 ### Dependencies
 
