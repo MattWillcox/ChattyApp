@@ -7,7 +7,6 @@ const uuidv1 = require('uuid/v1');
 const app = express();
 
 const server = http.createServer(app);
-// const wss = new ws.Server({server: server});
 const wss = new ws.Server({server});
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
@@ -18,7 +17,9 @@ const onlineUsers = {
   count: 0
 }
 
-const colors = ['#C0392B', '#3498DB', '#229954', '#230290']
+const colors = ['#C0392B', '#3498DB', '#229954', '#230290']; //Array of possible username colors
+
+//Broadcast function to send updates to all clients
 wss.broadcast = function broadcast(data) {
   wss.clients.forEach(function each(client) {
     if (client.readyState === ws.OPEN) {
@@ -27,6 +28,11 @@ wss.broadcast = function broadcast(data) {
   });
 };
 
+/*  Reads on user connection and waits for messages.
+    On message received it will check type and emit a response based on it.
+    Possible types are message, notification and image. Once response is created
+    it will send it out as a broadcast to all clients. It will also keep track of
+    connecting/disconnecting users and emit the current count for tracking  */
 wss.on('connection', (ws) => {
   console.log('Client connected');
   userColor = colors.shift();

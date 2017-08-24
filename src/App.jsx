@@ -7,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: {name: 'Anonymous'}, // optional. if currentUser is not defined, it means the user is Anonymous
+      currentUser: {name: 'Anonymous'}, // If currentUser is not defined, it means the user is Anonymous
       messages: [],
       notifications: [],
       onlineUsers: 0
@@ -16,6 +16,9 @@ class App extends Component {
     this.onNewUsername = this.onNewUsername.bind(this);
   }
 
+  /*  Once component is created it opens websocket to listen for events.
+  Once event is received it checks type and state will be updated with any
+  messages/notifications/username updates  */
   componentDidMount() {
     this.socket = new WebSocket('ws://localhost:3001');
     this.socket.addEventListener('message', (event) => {
@@ -66,6 +69,8 @@ class App extends Component {
     });
   }
 
+  /*  Reads new message submission from chatbar component and emits to WebSocket.
+      Does a check to confirm if message is text or image before sending  */
   onNewMessage(message) {
     var imgRegex = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.(jpg$)|(png$)|(gif$)/;
     if(imgRegex.test(message)){
@@ -85,6 +90,8 @@ class App extends Component {
     }
   }
 
+  /*  Reads new username submission from chatbat component and emits to WebSocket.
+      WebSocket will broadcast notification to all users that client has changed name  */
   onNewUsername(username) {
     this.socket.send(JSON.stringify({
       type: 'postNotification',
@@ -95,6 +102,7 @@ class App extends Component {
     this.setState({currentUser: {name: username}});
   }
 
+  /*  Renders HTML for our components  */
   render() {
     return (
       <div>

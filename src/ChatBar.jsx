@@ -14,12 +14,14 @@ class ChatBar extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
   }
 
+  //Reads event of user hitting enter after updating username and forwards to parent components
   onEnterUsername(event) {
     if(event.key === 'Enter'){
     this.props.onNewUsername(this.state.username);
     }
   }
 
+  //Reads event of user hitting enter after updating message field and forwards to parent components
   onEnterMessage(event) {
     const state = {};
     if(event.key === 'Enter'){
@@ -30,18 +32,21 @@ class ChatBar extends Component {
     }
   }
 
+  //Reads event of user adding characters to chat bar and updates current state
   onChangeMessage(event) {
     this.setState({
       content: event.target.value
     });
   }
 
+  //Reads event of user adding characters to username and updates current state
   onChangeUsername(event) {
     this.setState({
       username: event.target.value
     });
   }
 
+  //Creates our HTML
   render() {
     return (
       <footer className="chatbar">
