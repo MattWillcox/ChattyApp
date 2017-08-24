@@ -23,6 +23,7 @@ class MessageList extends Component {
         return <img src={message.content} alt={message.username} key={message.key} className='message-image'/>
       }
     });
+
     return (
       <div className="message-list">
         {messages}
