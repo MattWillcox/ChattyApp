@@ -18,6 +18,7 @@ class ChatBar extends Component {
   onEnterUsername(event) {
     if(event.key === 'Enter'){
     this.props.onNewUsername(this.state.username);
+    this.textInput.focus();
     }
   }
 
@@ -50,8 +51,8 @@ class ChatBar extends Component {
   render() {
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" onKeyPress={this.onEnterUsername} onChange={this.onChangeUsername} defaultValue= { this.props.name } />
-        <input className="chatbar-message" onKeyPress={this.onEnterMessage} onChange={this.onChangeMessage} placeholder="Type a message and hit ENTER" />
+        <input className="chatbar-username" onKeyPress={this.onEnterUsername} onChange={this.onChangeUsername} placeholder="Enter a username and hit ENTER" />
+        <input className="chatbar-message" ref={(thisInput) => {this.textInput = thisInput}} onKeyPress={this.onEnterMessage} onChange={this.onChangeMessage} placeholder="Type a message and hit ENTER" />
       </footer>
     );
   }

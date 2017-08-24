@@ -25,19 +25,21 @@ class App extends Component {
       const messageObject = JSON.parse(event.data);
       switch(messageObject.type) {
         case 'incomingMessage': {
-          const newMessages = this.state.messages;
-          newMessages.push({
-            type: 'incomingMessage',
-            key: messageObject.key,
-            username: messageObject.username,
-            content: messageObject.content,
-            color: messageObject.color
-          });
-          this.setState({messages: newMessages});
+          if(messageObject.content != ''){
+            const newMessages = this.state.messages;
+            newMessages.push({
+              type: 'incomingMessage',
+              key: messageObject.key,
+              username: messageObject.username,
+              content: messageObject.content,
+              color: messageObject.color
+            });
+            this.setState({messages: newMessages});
+          }
           break;
         }
         case 'incomingNotification': {
-          if(messageObject.newUsername){
+          if(messageObject.newUsername && messageObject.oldUsername != 'Anonymous'){
             const newMessages = this.state.messages;
             newMessages.push({
               type: 'incomingNotification',

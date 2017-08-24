@@ -34,7 +34,6 @@ wss.broadcast = function broadcast(data) {
     it will send it out as a broadcast to all clients. It will also keep track of
     connecting/disconnecting users and emit the current count for tracking  */
 wss.on('connection', (ws) => {
-  console.log('Client connected');
   userColor = colors.shift();
   colors.push(userColor);
   onlineUsers.count = wss.clients.size;
@@ -73,7 +72,6 @@ wss.on('connection', (ws) => {
   })
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
-    console.log('Client disconnected');
     onlineUsers.count = wss.clients.size;
     wss.broadcast(JSON.stringify(onlineUsers));
   })
